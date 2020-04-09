@@ -9,9 +9,24 @@
 </head>
 
 <body>
-  <progress class="overlay" id="health" value="100" max="100" style="visibility: hidden"> </progress>
-  <button id="resetButton"  >Play Again?</button>
-  <canvas id="canvas"></canvas>
+  <div style="display: flex; flex-direction: row;">
+    <div>
+    <ul style="list-style-type: none; margin: 0px; padding: 0px;">
+      <h2>Galaxy Galactica!</h2>
+      <h3>How To Play:</h3>
+      <li style="margin: 25px; padding: 0px"><img src="./images/hero1.png"> ARROWS TO MOVE</li>
+      <li style="margin-bottom: 25px; padding: 0px"><img src="./images/ball1.png"> 15 PTS TO WINS THE GAME! </img></li>
+      <li style="margin-bottom: 25px; padding: 0px"><img src="./images/monster1.png"><img src="./images/secondMonster.png"><img src="./images/thirdMonster.png">
+        AVOID ENEMY SHIPS! </img></li>
+      
+      <ul>      
+   </div>    
+<canvas style="height: 100%; width: auto;" id="canvas"></canvas>
+  </div>
+  <div>
+    <progress class="overlay" id="health" value="100" max="100" style="visibility: hidden"> </progress>
+    <button id="resetButton" style="visibility: hidden;">Play Again?</button>
+  </div>
   <script src="game.js"></script>
 </body>
 

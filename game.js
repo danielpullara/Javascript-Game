@@ -20,8 +20,8 @@ let speedY = 9;
 let secondMonsterSpeedX = 9;
 let secondMonsterSpeedY = 6;
 
-let thirdMonsterSpeedX = 12;
-let thirdMonsterSpeedY = 12;
+let thirdMonsterSpeedX = 9.5;
+let thirdMonsterSpeedY = 9.5;
 
 
 let ballspeedX = 8.5;
@@ -46,8 +46,8 @@ canvas.width = 1100;
 canvas.height = 600;
 //document.body.appendChild(canvas);
 
-let bgReady, heroReady, monsterReady, ballReady, bossReady, thirdMonsterReady, secondMonsterReady, gameOverReady, playAgainReady, winnerReady,tenHeartReady,nineHeartReady, eightHeartReady, sevenHeartReady, sixHeartReady, fiveHeartReady, fourHeartReady, threeHeartReady, twoHeartReady, heartReady;
-let bgImage, heroImage, monsterImage, ballImage, bossImage, thirdMonsterImage, secondMonsterImage, gameOverImage, playAgainImage, winnerImage,tenHeartImage,nineHeartImage, eightHeartImage, sevenHeartImage, sixHeartImage, fiveHeartImage, fourHeartImage, threeHeartImage, twoHeartImage, heartImage;
+let bgReady, heroReady, monsterReady, ballReady, bossReady, thirdMonsterReady, secondMonsterReady, gameOverReady, playAgainReady, winnerReady, tenHeartReady, nineHeartReady, eightHeartReady, sevenHeartReady, sixHeartReady, fiveHeartReady, fourHeartReady, threeHeartReady, twoHeartReady, heartReady;
+let bgImage, heroImage, monsterImage, ballImage, bossImage, thirdMonsterImage, secondMonsterImage, gameOverImage, playAgainImage, winnerImage, tenHeartImage, nineHeartImage, eightHeartImage, sevenHeartImage, sixHeartImage, fiveHeartImage, fourHeartImage, threeHeartImage, twoHeartImage, heartImage;
 
 let startTime = Date.now();
 const SECONDS_PER_ROUND = 30;
@@ -126,9 +126,18 @@ function reset() {
   heroReady = true;
   ballReady = true;
   monsterReady = true;
-  secondMonsterReady =false;
-  thirdMonsterReady = false;
-  
+  winnerReady = false;
+  tenHeartReady = true;
+  nineHeartReady = true;
+  eightHeartReady = true;
+  sevenHeartReady = true;
+  sixHeartReady = true;
+  fiveHeartReady = true;
+  fourHeartReady = true;
+  threeHeartReady = true;
+  twoHeartReady = true;
+  heartReady = true;
+
   render();
   console.log('after reset gameOverReady', gameOverReady)
   // loadImages();
@@ -158,7 +167,7 @@ function loadImages() {
   nineHeartImage.onload = function () {
     // show the hero image
 
-  nineHeartReady = true;
+    nineHeartReady = true;
   };
   nineHeartImage.src = "images/heart.png";
 
@@ -436,7 +445,7 @@ let update = function () {
   ) {
     health.value -= 2;
   }
-  
+
   // Moves the Monster
   monsterX = monsterX + speedX;
   monsterY = monsterY + speedY;
@@ -496,17 +505,16 @@ let update = function () {
   if (score >= 10) {
     thirdMonsterReady = true;
   }
-  
+
 
 
   if (score === 15) {
-    winnerReady = true
+    winnerReady = true;
     heroReady = false;
     ballReady = false;
     monsterReady = false;
     secondMonsterReady = false;
     thirdMonsterReady = false;
-    gameOverReady = false;
     playAgainReady = false;
   } else if (health.value === 0) {
     gameOverReady = true;
@@ -516,7 +524,7 @@ let update = function () {
     monsterReady = false;
     secondMonsterReady = false;
     thirdMonsterReady = false;
-    
+
   }
 
   if (health.value <= 10) {
@@ -552,13 +560,13 @@ let update = function () {
 
 }
 
-  // console.log(sprites)
+// console.log(sprites)
 
-  // if(sprites.length > 0){
-  //   for (var ix = sprites.length-1; ix>=0; ix--) {
-  //     sprites[ix].render();
-  //   }
-  // }
+// if(sprites.length > 0){
+//   for (var ix = sprites.length-1; ix>=0; ix--) {
+//     sprites[ix].render();
+//   }
+// }
 
 /**
  * This function, render, runs as often as possible.
@@ -573,109 +581,110 @@ var render = function () {
   if (playAgainReady) {
     ctx.drawImage(playAgainImage, 325, 200);
 
-  }
+    }
 
-  if (gameOverReady) {
-    console.log('gameoverinside render', gameOverReady)
-    ctx.drawImage(gameOverImage, 260, 25);
-  }
-  if (winnerReady) {
-    ctx.drawImage(winnerImage, 400, 200);
-  }
-  if (heroReady) {
-    ctx.drawImage(heroImage, heroX, heroY);
+    if (gameOverReady) {
+      console.log('gameoverinside render', gameOverReady)
+      ctx.drawImage(gameOverImage, 260, 25);
+      canvas.addEventListener("click", reset, false);
+    }
+    if (winnerReady) {
+      ctx.drawImage(winnerImage, 400, 200);
+    }
+    if (heroReady) {
+      ctx.drawImage(heroImage, heroX, heroY);
 
-  }
-  if (monsterReady) {
-    ctx.drawImage(monsterImage, monsterX, monsterY);
-  }
-  if (ballReady) {
-    ctx.drawImage(ballImage, ballX, ballY);
-  }
-  if (secondMonsterReady) {
-    ctx.drawImage(secondMonsterImage, secondMonsterX, secondMonsterY);
+    }
+    if (monsterReady) {
+      ctx.drawImage(monsterImage, monsterX, monsterY);
+    }
+    if (ballReady) {
+      ctx.drawImage(ballImage, ballX, ballY);
+    }
+    if (secondMonsterReady) {
+      ctx.drawImage(secondMonsterImage, secondMonsterX, secondMonsterY);
 
-  }
-  if (thirdMonsterReady) {
-    ctx.drawImage(thirdMonsterImage, thirdMonsterX, thirdMonsterY);
+    }
+    if (thirdMonsterReady) {
+      ctx.drawImage(thirdMonsterImage, thirdMonsterX, thirdMonsterY);
 
-  }
+    }
 
-  if (tenHeartReady) {
-  ctx.drawImage(heartImage, 1060, 0);
-  }
+    if (tenHeartReady) {
+      ctx.drawImage(heartImage, 1060, 0);
+    }
 
-  if (nineHeartReady) {
-    ctx.drawImage(heartImage, 1030, 0);
-  }
+    if (nineHeartReady) {
+      ctx.drawImage(heartImage, 1030, 0);
+    }
 
-  if (eightHeartReady) {
+    if (eightHeartReady) {
 
-    ctx.drawImage(heartImage, 1000, 0);
-  }
+      ctx.drawImage(heartImage, 1000, 0);
+    }
 
-  if (sevenHeartReady) {
-    ctx.drawImage(heartImage, 970, 0);
-  }
+    if (sevenHeartReady) {
+      ctx.drawImage(heartImage, 970, 0);
+    }
 
-  if (sixHeartReady) {
-    ctx.drawImage(heartImage, 940, 0);
-  }
+    if (sixHeartReady) {
+      ctx.drawImage(heartImage, 940, 0);
+    }
 
-  if (fiveHeartReady) {
-    ctx.drawImage(heartImage, 910, 0);
-  }
+    if (fiveHeartReady) {
+      ctx.drawImage(heartImage, 910, 0);
+    }
 
-  if (fourHeartReady) {
-    ctx.drawImage(heartImage, 880, 0);
-  }
+    if (fourHeartReady) {
+      ctx.drawImage(heartImage, 880, 0);
+    }
 
-  if (threeHeartReady) {
-    ctx.drawImage(heartImage, 850, 0);
-  }
+    if (threeHeartReady) {
+      ctx.drawImage(heartImage, 850, 0);
+    }
 
-  if (twoHeartReady) {
-    ctx.drawImage(heartImage, 820, 0);
-  }
+    if (twoHeartReady) {
+      ctx.drawImage(heartImage, 820, 0);
+    }
 
-  if (heartReady) {
-  ctx.drawImage(heartImage, 790, 0);
-}
+    if (heartReady) {
+      ctx.drawImage(heartImage, 790, 0);
+    }
 
-  ctx.fillText(`Your Health:`, 700, 20);
-  ctx.fillStyle = "white";
-  ctx.fillText(`Your Score: ${score}`, 20, 20);
-  ctx.fillStyle = "white";
-  // // ctx.clearRect(0, 0, canvas.width, canvas.height);
-  // if(sprites.length > 0){
-  //   for (var ix = sprites.length-1; ix>=0; ix--) {
-  //     sprites[ix].render();
-  //   }
-  // }
-};
+    ctx.fillText(`Your Health:`, 700, 20);
+    ctx.fillStyle = "white";
+    ctx.fillText(`Your Score: ${score}`, 20, 20);
+    ctx.fillStyle = "white";
+    // // ctx.clearRect(0, 0, canvas.width, canvas.height);
+    // if(sprites.length > 0){
+    //   for (var ix = sprites.length-1; ix>=0; ix--) {
+    //     sprites[ix].render();
+    //   }
+    // }
+  };
 
 
 
-/**
- * The main game loop. Most every game will have two distinct parts:
- * update (updates the state of the game, in this case our hero and monster)
- * render (based on the state of our game, draw the right things)
- */
-var main = function () {
-  // console.log('main still running')
-  update();
-  render();
-  // Request to do this again ASAP. This is a special method
-  // for web browsers. 
-  requestAnimationFrame(main);
-};
+  /**
+   * The main game loop. Most every game will have two distinct parts:
+   * update (updates the state of the game, in this case our hero and monster)
+   * render (based on the state of our game, draw the right things)
+   */
+  var main = function () {
+    // console.log('main still running')
+    update();
+    render();
+    // Request to do this again ASAP. This is a special method
+    // for web browsers. 
+    requestAnimationFrame(main);
+  };
 
-// Cross-browser support for requestAnimationFrame.
-// Safely ignore this line. It's mostly here for people with old web browsers.
-var w = window;
-requestAnimationFrame = w.requestAnimationFrame || w.webkitRequestAnimationFrame || w.msRequestAnimationFrame || w.mozRequestAnimationFrame;
+  // Cross-browser support for requestAnimationFrame.
+  // Safely ignore this line. It's mostly here for people with old web browsers.
+  var w = window;
+  requestAnimationFrame = w.requestAnimationFrame || w.webkitRequestAnimationFrame || w.msRequestAnimationFrame || w.mozRequestAnimationFrame;
 
-// Let's play this game!
-loadImages();
-setupKeyboardListeners();
-main();
+  // Let's play this game!
+  loadImages();
+  setupKeyboardListeners();
+  main();
